@@ -29,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/screens/components.dart';
 import 'package:flutter_application_1/screens/feedback.dart';
+import 'package:flutter_application_1/screens/profile.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -83,7 +84,14 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Profile'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProfilePage(), // Redirect to FeedbackPage
+                ),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
