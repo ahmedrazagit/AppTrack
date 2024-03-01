@@ -1,5 +1,5 @@
-/*import 'package:alert_dialog_service/alert_dialog_service.dart';
-import 'package:main_app_ui/utils/fonts.dart';
+/*import 'package:flutter_application_1/applock/alert_dialog_service/alert_dialog_service.dart';
+import 'package:flutter_application_1/applock/main_app_ui/utils/fonts.dart';
 import 'package:flutter/material.dart';
 
 class AlertDialogHeader extends StatelessWidget {
