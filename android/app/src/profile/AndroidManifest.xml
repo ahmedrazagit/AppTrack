@@ -7,6 +7,15 @@ package="com.example.flutter_application_1" xmlns:tools="http://schemas.android.
     -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+       <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <application>
+        ...
+        <service
+           android:name="com.phan_tech.flutter_overlay_apps.OverlayService"
+           android:exported="false" />
+    </application>
        <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />

@@ -22,14 +22,14 @@ import 'package:app_usage/app_usage.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter_application_1/screens/AppDetailPage.dart';
 
-void main() => runApp(FeedbackPage());
+void main() => runApp(screentime());
 
-class FeedbackPage extends StatefulWidget {
+class screentime extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<FeedbackPage> {
+class _MyAppState extends State<screentime> {
   List<AppUsageInfo> _usageInfos = [];
   List<ApplicationWithIcon> _installedApps = [];
 

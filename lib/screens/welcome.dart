@@ -28,8 +28,8 @@ class WelcomeScreen extends StatelessWidget {
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/screens/components.dart';
-import 'package:flutter_application_1/screens/feedback.dart';
-import 'package:flutter_application_1/screens/profile.dart';
+import 'package:flutter_application_1/screens/screentime.dart';
+import 'package:flutter_application_1/screens/applock.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -88,7 +88,7 @@ class NavDrawer extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) =>
-                      ProfilePage(), // Redirect to FeedbackPage
+                      AppLocks(), // Redirect to ScreenTimePage
                 ),
               );
             },
@@ -100,12 +100,12 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
+            title: Text('Screentime'),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) =>
-                      FeedbackPage(), // Redirect to FeedbackPage
+                      screentime(), // Redirect to FeedbackPage
                 ),
               );
             },
