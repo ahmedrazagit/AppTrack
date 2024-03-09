@@ -27,7 +27,10 @@ class WelcomeScreen extends StatelessWidget {
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/screens/chatbot.dart';
 import 'package:flutter_application_1/screens/components.dart';
+import 'package:flutter_application_1/screens/notifications.dart';
+import 'package:flutter_application_1/screens/overlaysetting.dart';
 import 'package:flutter_application_1/screens/screentime.dart';
 import 'package:flutter_application_1/screens/applock.dart';
 
@@ -83,7 +86,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
+            title: Text('Applock'),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -95,8 +98,15 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => {Navigator.of(context).pop()},
+            title: Text('OverlaySettings'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      overlaysettings(), // Redirect to FeedbackPage
+                ),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.border_color),
@@ -111,9 +121,26 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.border_color),
+            title: Text('Notifications'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => notis(), // Redirect to FeedbackPage
+                ),
+              );
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
+            title: Text('EmotionBuddy ChatBot'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => chatbot(), // Redirect to FeedbackPage
+                ),
+              );
+            },
           ),
         ],
       ),

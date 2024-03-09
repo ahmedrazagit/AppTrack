@@ -124,7 +124,7 @@ class AlertDialogHeader extends StatelessWidget {
   }
 }*/
 
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:flutter_application_1/applock/alert_dialog_service/alert_dialog_service.dart';
 import 'package:flutter_application_1/applock/main_app_ui/utils/fonts.dart';
 import 'package:device_apps/device_apps.dart';
@@ -214,6 +214,335 @@ class AlertDialogHeader extends StatelessWidget {
       icon: Icon(
         Icons.close,
       ),
+    );
+  }
+}*/
+
+/*import 'package:flutter/material.dart';
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart'; // Import the SDK
+import 'package:flutter_application_1/applock/alert_dialog_service/alert_dialog_service.dart';
+import 'package:flutter_application_1/applock/main_app_ui/utils/fonts.dart';
+import 'package:device_apps/device_apps.dart';
+import 'package:flutter_application_1/screens/const.dart';
+
+class AlertDialogHeader extends StatefulWidget {
+  @override
+  _AlertDialogHeaderState createState() => _AlertDialogHeaderState();
+}
+
+class _AlertDialogHeaderState extends State<AlertDialogHeader> {
+  late OpenAI openAI;
+  String _recommendation = "Fetching recommendation...";
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the OpenAI instance with your API key and other configurations
+    openAI = OpenAI.instance.build(
+      token: OPENAI_API_KEY,
+      baseOption: HttpSetup(
+        receiveTimeout: const Duration(seconds: 20),
+        connectTimeout: const Duration(seconds: 20),
+      ),
+      enableLog: true,
+    );
+    _fetchRecommendation();
+  }
+
+  void _fetchRecommendation() async {
+    final request = ChatCompleteText(
+      messages: [
+        Messages(
+            role: Role.user, content: "Suggest a healthy activity for a break")
+      ],
+      maxToken: 100,
+      model: GptTurbo0301ChatModel(),
+    );
+
+    try {
+      ChatCTResponse? response =
+          await openAI.onChatCompletion(request: request);
+      print("Response received: ${response?.choices.last.message?.content}");
+      if (response != null &&
+          response.choices.isNotEmpty &&
+          response.choices.last.message != null) {
+        setState(() {
+          _recommendation = response.choices.last.message!.content.trim();
+        });
+      } else {
+        setState(() {
+          _recommendation = "No recommendation found.";
+        });
+      }
+    } catch (e) {
+      print("Error fetching recommendation: $e");
+      setState(() {
+        _recommendation = "Error fetching recommendation: $e";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Material(
+      type: MaterialType.transparency,
+      child: Center(
+        child: Container(
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.8,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Time is Up",
+                    style: Fonts.header3(color: Colors.black)),
+              ),
+              SizedBox(height: 10),
+              Expanded(
+                child: _buildAppList(context),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  _recommendation,
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              _dismissButton(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppList(BuildContext context) {
+    return FutureBuilder(
+      future: DeviceApps.getInstalledApplications(
+        includeAppIcons: true,
+        includeSystemApps: true, // Changed to true to include system apps
+        onlyAppsWithLaunchIntent: true,
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          List<Application> apps = snapshot.data as List<Application>;
+          return ListView.builder(
+            itemCount: apps.length,
+            itemBuilder: (context, index) {
+              Application app = apps[index];
+              return ListTile(
+                leading: app is ApplicationWithIcon
+                    ? Container(
+                        padding: EdgeInsets.all(3), // Adjust padding
+                        child: Image.memory(app.icon, fit: BoxFit.cover),
+                      )
+                    : null,
+                title: Text(app.appName,
+                    style: TextStyle(
+                        color:
+                            Colors.black)), // Adjust text color for visibility
+                onTap: () => DeviceApps.openApp(app.packageName),
+              );
+            },
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _dismissButton(BuildContext context) {
+    return IconButton(
+      color: Colors.black,
+      onPressed: () async {
+        await AlertDialogService.closeAlertDialog();
+      },
+      icon: Icon(Icons.close),
+    );
+  }
+}*/
+
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_apps/device_apps.dart';
+import 'package:flutter_application_1/applock/alert_dialog_service/alert_dialog_service.dart';
+import 'package:flutter_application_1/applock/main_app_ui/utils/fonts.dart';
+import 'package:flutter_application_1/screens/const.dart'; // Assuming this is where OPENAI_API_KEY is defined
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+
+class AlertDialogHeader extends StatefulWidget {
+  @override
+  _AlertDialogHeaderState createState() => _AlertDialogHeaderState();
+}
+
+class _AlertDialogHeaderState extends State<AlertDialogHeader> {
+  late OpenAI openAI;
+  String _recommendation = "Fetching recommendation...";
+  bool _aiRecommendationsEnabled = true;
+  bool _appSelectionEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences().then((_) {
+      if (_aiRecommendationsEnabled) {
+        openAI = OpenAI.instance.build(
+          token: OPENAI_API_KEY,
+          baseOption: HttpSetup(
+            receiveTimeout: const Duration(seconds: 20),
+            connectTimeout: const Duration(seconds: 20),
+          ),
+          enableLog: true,
+        );
+        _fetchRecommendation();
+      }
+    });
+  }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _aiRecommendationsEnabled =
+          prefs.getBool('aiRecommendationsEnabled') ?? true;
+      _appSelectionEnabled = prefs.getBool('appSelectionEnabled') ?? true;
+    });
+  }
+
+  void _fetchRecommendation() async {
+    final request = ChatCompleteText(
+      messages: [
+        Messages(
+            role: Role.user, content: "Suggest a healthy activity for a break")
+      ],
+      maxToken: 100,
+      model: GptTurbo0301ChatModel(),
+    );
+
+    try {
+      ChatCTResponse? response =
+          await openAI.onChatCompletion(request: request);
+      print("Response received: ${response?.choices.last.message?.content}");
+      if (response != null &&
+          response.choices.isNotEmpty &&
+          response.choices.last.message != null) {
+        setState(() {
+          _recommendation = response.choices.last.message!.content.trim();
+        });
+      } else {
+        setState(() {
+          _recommendation = "No recommendation found.";
+        });
+      }
+    } catch (e) {
+      print("Error fetching recommendation: $e");
+      setState(() {
+        _recommendation = "Error fetching recommendation: $e";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Material(
+      type: MaterialType.transparency,
+      child: Center(
+        child: Container(
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.8,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Time is Up",
+                    style: Fonts.header3(color: Colors.black)),
+              ),
+              SizedBox(height: 10),
+              _aiRecommendationsEnabled
+                  ? Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        _recommendation,
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : Container(),
+              _appSelectionEnabled
+                  ? Expanded(
+                      child: _buildAppList(context),
+                    )
+                  : Container(),
+              _dismissButton(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppList(BuildContext context) {
+    return FutureBuilder(
+      future: DeviceApps.getInstalledApplications(
+        includeAppIcons: true,
+        includeSystemApps: true, // Changed to true to include system apps
+        onlyAppsWithLaunchIntent: true,
+      ),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
+          List<Application> apps = snapshot.data as List<Application>;
+          return ListView.builder(
+            itemCount: apps.length,
+            itemBuilder: (context, index) {
+              Application app = apps[index];
+              return ListTile(
+                leading: app is ApplicationWithIcon
+                    ? Container(
+                        padding: EdgeInsets.all(3), // Adjust padding
+                        child: Image.memory(app.icon, fit: BoxFit.cover),
+                      )
+                    : null,
+                title: Text(app.appName,
+                    style: TextStyle(
+                        color:
+                            Colors.black)), // Adjust text color for visibility
+                onTap: () => DeviceApps.openApp(app.packageName),
+              );
+            },
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _dismissButton(BuildContext context) {
+    return IconButton(
+      color: Colors.black,
+      onPressed: () async {
+        await AlertDialogService.closeAlertDialog();
+      },
+      icon: Icon(Icons.close),
     );
   }
 }

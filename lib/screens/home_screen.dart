@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const ScreenTitle(title: 'Hello'),
                       const Text(
-                        'Welcome to Tasky, where you manage your daily tasks',
+                        'Welcome to AppTrack, where you manage your app usage and put your life back on track',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.grey,
