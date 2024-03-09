@@ -106,8 +106,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/applock/alert_dialog_service/overlay_widget.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
+import 'package:flutter_application_1/screens/screentime.dart';
 import 'package:flutter_application_1/screens/signup.dart'; // Ensure correct file name
 import 'package:flutter_application_1/screens/welcome.dart'; // Ensure correct file name
+import 'package:flutter_application_1/screens/screentime.dart'; // Ensure correct file name
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -137,12 +139,14 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'Ubuntu'),
         ),
       ),
-      initialRoute: WelcomeScreen.id, // Set initial route to WelcomeScreen
+      //initialRoute: HomeScreen.id,
+      initialRoute: screentime.id, // Set initial route to WelcomeScreen
       routes: {
         HomeScreen.id: (context) => const HomeScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
         SignUpScreen.id: (context) => const SignUpScreen(),
-        WelcomeScreen.id: (context) => const WelcomeScreen(),
+        //WelcomeScreen.id: (context) => const WelcomeScreen(),
+        screentime.id: (context) => screentime(),
         // Add route for AppLockPage once created
       },
     );

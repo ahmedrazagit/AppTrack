@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/components.dart';
 import 'package:flutter_application_1/screens/constants.dart';
+import 'package:flutter_application_1/screens/screentime.dart';
 import 'package:flutter_application_1/screens/welcome.dart';
+import 'package:flutter_application_1/screens/screentime.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -87,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.popAndPushNamed(
                                       context, LoginScreen.id);
                                 });
-                                Navigator.pushNamed(context, WelcomeScreen.id);
+                                Navigator.pushNamed(context, screentime.id);
                               }
                             } catch (e) {
                               signUpAlert(

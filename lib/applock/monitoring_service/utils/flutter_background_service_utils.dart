@@ -12,7 +12,7 @@ Future<void> startMonitoringService() async {
     autoStart: true,
     isForegroundMode: true,
     autoStartOnBoot: true,
-    initialNotificationTitle: "Flutter Challenge (background).",
+    initialNotificationTitle: "Flutter app (background).",
     initialNotificationContent: "",
   );
 
