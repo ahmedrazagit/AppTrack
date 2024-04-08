@@ -139,13 +139,13 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'Ubuntu'),
         ),
       ),
-      //initialRoute: HomeScreen.id,
-      initialRoute: screentime.id, // Set initial route to WelcomeScreen
+      initialRoute: HomeScreen.id,
+      //initialRoute: screentime.id, // Set initial route to WelcomeScreen
       routes: {
         HomeScreen.id: (context) => const HomeScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
         SignUpScreen.id: (context) => const SignUpScreen(),
-        //WelcomeScreen.id: (context) => const WelcomeScreen(),
+        WelcomeScreen.id: (context) => const WelcomeScreen(),
         screentime.id: (context) => screentime(),
         // Add route for AppLockPage once created
       },
