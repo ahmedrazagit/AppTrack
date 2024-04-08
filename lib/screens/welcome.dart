@@ -29,8 +29,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/screens/chatbot.dart';
 import 'package:flutter_application_1/screens/components.dart';
-import 'package:flutter_application_1/screens/notifications.dart';
-import 'package:flutter_application_1/screens/overlaysetting.dart';
+//import 'package:flutter_application_1/screens/notifications.dart';
+import 'package:flutter_application_1/screens/overlaysettings.dart';
+import 'package:flutter_application_1/screens/prediction.dart';
 import 'package:flutter_application_1/screens/screentime.dart';
 import 'package:flutter_application_1/screens/applock.dart';
 
@@ -70,7 +71,7 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'Side menu',
+              'AppTrack: Your Personal Time Manager',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
@@ -109,7 +110,7 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
+            leading: Icon(Icons.timer),
             title: Text('Screentime'),
             onTap: () {
               Navigator.of(context).push(
@@ -122,17 +123,18 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.border_color),
-            title: Text('Notifications'),
+            title: Text('predict'),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => notis(), // Redirect to FeedbackPage
+                  builder: (context) =>
+                      ScreenTimeApp(), // Redirect to FeedbackPage
                 ),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: Icon(Icons.person),
             title: Text('EmotionBuddy ChatBot'),
             onTap: () {
               Navigator.of(context).push(

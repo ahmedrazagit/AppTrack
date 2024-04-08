@@ -87,16 +87,16 @@ class HomeScreen extends StatelessWidget {
                             icon: CircleAvatar(
                               radius: 25,
                               backgroundColor: Colors.transparent,
-                              child:
-                                  Image.asset('assets/images/icons/google.png'),
+                              //child:
+                              //Image.asset('assets/images/icons/google.png'),
                             ),
                           ),
                           IconButton(
                             onPressed: () {},
                             icon: CircleAvatar(
                               radius: 25,
-                              child: Image.asset(
-                                  'assets/images/icons/linkedin.png'),
+                              //child: Image.asset(
+                              //   'assets/images/icons/linkedin.png'),
                             ),
                           ),
                         ],

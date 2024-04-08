@@ -146,7 +146,7 @@ class _PermissionsScreenState extends State<PermissionsScreen> {
                             decoration: TextDecoration.underline),
                       ),
                       Text(
-                        "To determine Application startup",
+                        "To determine Application Usage Analytics",
                         style: TextStyle(
                             fontSize: screenWidth * 0.03,
                             fontStyle: FontStyle.italic),
@@ -185,7 +185,7 @@ class _PermissionsScreenState extends State<PermissionsScreen> {
                             decoration: TextDecoration.underline),
                       ),
                       Text(
-                        "To popup a timer display",
+                        "To popup a the overlay feature for the AppLock",
                         style: TextStyle(
                             fontSize: screenWidth * 0.03,
                             fontStyle: FontStyle.italic),
