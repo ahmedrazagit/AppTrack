@@ -781,7 +781,7 @@ class _screentimeState extends State<screentime> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Screen Time'),
+          title: const Text('AppTrack Dashboard'),
           actions: [
             IconButton(
               icon: Icon(_showBarChart ? Icons.pie_chart : Icons.bar_chart),

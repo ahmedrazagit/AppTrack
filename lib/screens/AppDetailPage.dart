@@ -915,7 +915,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
     );
   }
 }*/
-
+/*
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:app_usage/app_usage.dart';
@@ -927,6 +927,8 @@ class AppDetailPage extends StatefulWidget {
   final String packageName;
 
   const AppDetailPage({Key? key, required this.packageName}) : super(key: key);
+
+  get isDailyView => null;
 
   @override
   _AppDetailPageState createState() => _AppDetailPageState();
@@ -1198,6 +1200,332 @@ class _AppDetailPageState extends State<AppDetailPage> {
                 _loadUsageStats();
               });
             },
+          ),
+        ],
+      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.7,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: LineChart(_chartData()),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: ElevatedButton(
+                    onPressed: () => _showAIAnalysis(context),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      primary: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                    ),
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.blueAccent, Colors.pinkAccent],
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "AI Analysis",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _usageData.length,
+                    itemBuilder: (context, index) {
+                      String key = _usageData.keys.elementAt(index);
+                      Duration usage = _usageData.values.elementAt(index);
+                      return ListTile(
+                        title: Text("Date/Time: $key"),
+                        subtitle: Text("Usage: ${_formatDuration(usage)}"),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+}
+*/
+
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:app_usage/app_usage.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart'; // Make sure this import is correct
+import 'package:flutter_application_1/screens/const.dart'; // This should contain your OpenAI API key
+
+class AppDetailPage extends StatefulWidget {
+  final String packageName;
+
+  const AppDetailPage({Key? key, required this.packageName}) : super(key: key);
+
+  @override
+  _AppDetailPageState createState() => _AppDetailPageState();
+}
+
+class _AppDetailPageState extends State<AppDetailPage> {
+  Map<String, Duration> _usageData = {};
+  bool _isLoading = true;
+  bool _isDailyView = true; // Changed default view to true for daily view
+  late OpenAI openAI;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsageStats();
+    _initializeOpenAI();
+  }
+
+  void _initializeOpenAI() {
+    openAI = OpenAI.instance.build(
+      token: OPENAI_API_KEY,
+      baseOption: HttpSetup(
+        receiveTimeout: const Duration(seconds: 20),
+        connectTimeout: const Duration(seconds: 20),
+      ),
+      enableLog: true,
+    );
+  }
+
+  Future<void> _loadUsageStats() async {
+    DateTime now = DateTime.now();
+    Map<String, Duration> usageMap = {};
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    if (_isDailyView) {
+      DateTime startOfToday = DateTime(now.year, now.month, now.day, now.hour);
+      for (int i = 23; i >= 0; i--) {
+        DateTime startHour = startOfToday.subtract(Duration(hours: i));
+        DateTime endHour =
+            startHour.add(Duration(hours: 1)).subtract(Duration(seconds: 1));
+
+        List<AppUsageInfo> infoList =
+            await AppUsage().getAppUsage(startHour, endHour);
+        Duration totalDuration = Duration();
+        for (var info in infoList) {
+          if (info.packageName == widget.packageName) {
+            totalDuration += info.usage;
+          }
+        }
+
+        String formattedHour = DateFormat('HH:mm').format(startHour);
+        usageMap[formattedHour] = totalDuration;
+      }
+    } else {
+      DateTime sevenDaysAgo = now.subtract(Duration(days: 6));
+      for (int i = 0; i < 7; i++) {
+        DateTime startOfDay = DateTime(
+            sevenDaysAgo.year, sevenDaysAgo.month, sevenDaysAgo.day + i);
+        DateTime endOfDay = DateTime(
+            startOfDay.year, startOfDay.month, startOfDay.day, 23, 59, 59);
+
+        List<AppUsageInfo> dailyInfoList =
+            await AppUsage().getAppUsage(startOfDay, endOfDay);
+        Duration totalDuration = Duration();
+        for (var info in dailyInfoList) {
+          if (info.packageName == widget.packageName) {
+            totalDuration += info.usage;
+          }
+        }
+
+        String formattedDate = DateFormat('yyyy-MM-dd').format(startOfDay);
+        usageMap[formattedDate] = totalDuration;
+      }
+    }
+
+    setState(() {
+      _usageData = usageMap;
+      _isLoading = false;
+    });
+  }
+
+  String _formatDuration(Duration duration) {
+    return "${duration.inHours}h ${duration.inMinutes % 60}m ${duration.inSeconds % 60}s";
+  }
+
+  void _showAIAnalysis(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: <Widget>[
+              CircularProgressIndicator(),
+              SizedBox(width: 10),
+              Text("Analyzing..."),
+            ],
+          ),
+        );
+      },
+    );
+
+    String prompt =
+        "Do not mention you are an AI model.Provide an analysis of the data app usage data in terms of the user using this app, derive insights such as peak usages and times when they were most active, then give suggestions on how the user can decrease their screentime usage such as using the Applock feature within this app:\n";
+    _usageData.forEach((key, value) {
+      prompt += "$key: ${_formatDuration(value)}\n";
+    });
+
+    final request = ChatCompleteText(
+      messages: [Messages(role: Role.user, content: prompt)],
+      maxToken: 200,
+      model: GptTurbo0301ChatModel(), // Adjust the model as needed
+    );
+
+    try {
+      ChatCTResponse? response =
+          await openAI.onChatCompletion(request: request);
+      Navigator.of(context).pop(); // Close the analyzing dialog
+
+      // Use a new BuildContext to ensure the dialog can be closed properly
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          // Notice the new dialogContext
+          return AlertDialog(
+            title: Text("AI Analysis"),
+            content: SingleChildScrollView(
+              child: Text(
+                  response?.choices.first.message?.content ?? "No response"),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("Close"),
+                onPressed: () {
+                  Navigator.pop(
+                      dialogContext); // Use dialogContext to close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      Navigator.pop(context); // Close the analyzing dialog if an error occurs
+      print("Error fetching AI analysis: $e");
+    }
+  }
+
+  List<FlSpot> _generateSpots() {
+    final List<FlSpot> spots = [];
+    int index = 0;
+
+    _usageData.forEach((key, duration) {
+      final hours = duration.inMinutes / 60.0;
+      double xValue = index.toDouble();
+
+      if (!_isDailyView) {
+        final date = DateFormat('yyyy-MM-dd').parse(key);
+        xValue = date.day.toDouble();
+      }
+
+      spots.add(FlSpot(xValue, hours));
+      index++;
+    });
+
+    return spots;
+  }
+
+  LineChartData _chartData() {
+    double minY = 0;
+    double maxY = _usageData.values
+        .map((duration) => duration.inMinutes / 60.0)
+        .reduce(max)
+        .ceilToDouble();
+    maxY +=
+        maxY * 0.1; // Increase maxY by 10% for some space above the highest bar
+
+    return LineChartData(
+      minY: minY,
+      maxY: maxY,
+      lineBarsData: [
+        LineChartBarData(
+          spots: _generateSpots(),
+          isCurved: true,
+          color: Colors.blueAccent,
+          barWidth: 2.5,
+          isStrokeCapRound: true,
+          dotData: FlDotData(show: false),
+          belowBarData: BarAreaData(show: false),
+        ),
+      ],
+      titlesData: FlTitlesData(
+        show: true,
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: (value, meta) {
+              if (_isDailyView) {
+                return Text('${value.toInt() % 24}:00');
+              } else {
+                DateTime day =
+                    DateTime.now().subtract(Duration(days: value.toInt()));
+                return Text(DateFormat('E').format(day));
+              }
+            },
+            reservedSize: 42,
+          ),
+        ),
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: (value, meta) => Text('${value.toInt()}h'),
+            interval: 1,
+            reservedSize: 28,
+          ),
+        ),
+      ),
+      gridData: FlGridData(show: false),
+      borderData: FlBorderData(show: false),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('App Usage Details'),
+        actions: [
+          // Replaced IconButton with a more descriptive Button
+          Container(
+            margin: EdgeInsets.only(right: 8),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  _isDailyView = !_isDailyView;
+                  _loadUsageStats();
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+              ),
+              child: Text(_isDailyView ? "Weekly" : "Hourly"),
+            ),
           ),
         ],
       ),
