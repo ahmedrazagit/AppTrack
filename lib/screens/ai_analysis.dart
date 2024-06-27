@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class AIAnalysisService {
   final String _openAiApiKey =
-      "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"; // Securely manage this key
+      ""; // Securely manage this key
 
   Future<String> getAnalysis(String prompt) async {
     const url = "https://api.openai.com/v1/chat/completions";
