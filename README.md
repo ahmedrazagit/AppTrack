@@ -105,22 +105,22 @@
 
 3. Install Requirements
 
-     pip install -r requirements.txt
+            pip install -r requirements.txt
 
 4. Run Flask API
 
-     python app.py
+            python app.py
 
 5. Open up a new terminal and download dependencies for Flutter
 
-      flutter pub get
+            flutter pub get
 
 6. Run Flutter on an Android Emulator or device
        
 
        flutter run
 
-       A full tutorial for setting up an emulator can be found at https://developer.android. com/studio/run/emulator.
+       A full tutorial for setting up an emulator can be found at https://developer.android.com/studio/run/emulator.
 
 
 7: Login email:ahmedraza1233@gmail.com
