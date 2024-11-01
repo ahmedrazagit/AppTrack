@@ -34,14 +34,14 @@
 
 ### Screenshots
 
-#### ## Login Screen  
+## Login Screen  
 <p float="left">
    <img src="https://github.com/user-attachments/assets/0675943c-0700-4f7d-bd08-7b52c7a48e65" width="200" />
    <img src="https://github.com/user-attachments/assets/d0390351-59a3-4905-93ba-771e11b4fbbc" width="200" />
 </p>
 User login screens with varying styles.
 
-#### ## App Dashboard and Analysis
+#### App Dashboard and Analysis
 <p float="left">
    <img src="https://github.com/user-attachments/assets/f7e135a0-3e60-4739-85ac-be84e04ffbaf" width="200" />
    <img src="https://github.com/user-attachments/assets/529e69c2-73e3-4ffe-b2b8-1c7f9859786c" width="200" />
