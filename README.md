@@ -41,7 +41,7 @@
 </p>
 User login screens with varying styles.
 
-#### App Dashboard and Analysis
+## App Dashboard and Analysis
 <p float="left">
    <img src="https://github.com/user-attachments/assets/f7e135a0-3e60-4739-85ac-be84e04ffbaf" width="200" />
    <img src="https://github.com/user-attachments/assets/529e69c2-73e3-4ffe-b2b8-1c7f9859786c" width="200" />
@@ -49,7 +49,7 @@ User login screens with varying styles.
 </p>
 Screens showing dashboard overview and detailed app usage analytics.
 
-#### ## App Menu and Permissions
+## App Menu and Permissions
 <p float="left">
    <img src="https://github.com/user-attachments/assets/cc445377-a0c9-46c9-9ee0-e9ced4fbb8fc" width="200" />
    <img src="https://github.com/user-attachments/assets/0d2e7d52-7663-4d78-8171-64c8b12ba9be" width="200" />
@@ -57,21 +57,21 @@ Screens showing dashboard overview and detailed app usage analytics.
 </p>
 App menu for navigating features and permissions setup screens.
 
-#### ## App Lock Settings and Time Limit Exceeded
+## App Lock Settings and Time Limit Exceeded
 <p float="left">
    <img src="https://github.com/user-attachments/assets/82bc2262-7efa-42ee-8b55-288d65f4d8f8" width="200" />
    <img src="https://github.com/user-attachments/assets/bf8e801b-9e9b-4362-bda6-691a015f7836" width="200" />
 </p>
 Settings to set app usage limits and notification when time limit is exceeded.
 
-#### ## App Overlay and Overlay Settings
+## App Overlay and Overlay Settings
 <p float="left">
    <img src="https://github.com/user-attachments/assets/e0d36830-1876-438a-9bf3-41776309cc1c" width="200" />
    <img src="https://github.com/user-attachments/assets/ec67d708-f54c-4cc9-9aa1-3a10e4ff886c" width="200" />
 </p>
 Customizable overlays that provide reminders and overlay settings screen.
 
-#### ## Chatbot
+## Chatbot
 <p float="left">
    <img src="https://github.com/user-attachments/assets/1c47d4b0-cb23-4371-8ff0-277d2d73ca0f" width="200" />
 </p>
@@ -114,5 +114,7 @@ AI-powered chatbot offering personalized support and recommendations.
        A full tutorial for setting up an emulator can be found at https://developer.android.com/studio/run/emulator.
 
 
-7: Login email:ahmedraza1233@gmail.com
-   Password:123456
+7. Login details for the app for testing purposes or you can signup on your own.
+   
+       Login email:ahmedraza1233@gmail.com
+       Password:123456
