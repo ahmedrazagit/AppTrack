@@ -34,57 +34,48 @@
 
 ### Screenshots
 
-1. ## **Login Screen**  
-   ![Login Screen 1](https://github.com/user-attachments/assets/0675943c-0700-4f7d-bd08-7b52c7a48e65)  
-   User login screen.
+#### ## Login Screen  
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/0675943c-0700-4f7d-bd08-7b52c7a48e65" width="200" />
+   <img src="https://github.com/user-attachments/assets/d0390351-59a3-4905-93ba-771e11b4fbbc" width="200" />
+</p>
+User login screens with varying styles.
 
-2. **Login Screen - Alternate**  
-   ![Login Screen 2](https://github.com/user-attachments/assets/d0390351-59a3-4905-93ba-771e11b4fbbc)  
-   Alternate login screen with different UI styling.
+#### ## App Dashboard and Analysis
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/f7e135a0-3e60-4739-85ac-be84e04ffbaf" width="200" />
+   <img src="https://github.com/user-attachments/assets/529e69c2-73e3-4ffe-b2b8-1c7f9859786c" width="200" />
+   <img src="https://github.com/user-attachments/assets/d7125187-c60f-4889-a0ab-4fd485bd36e8" width="200" />
+</p>
+Screens showing dashboard overview and detailed app usage analytics.
 
-3. **App Dashboard**  
-   ![App Dashboard](https://github.com/user-attachments/assets/f7e135a0-3e60-4739-85ac-be84e04ffbaf)  
-   Overview of screen time stats and analytics.
+#### ## App Menu and Permissions
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/cc445377-a0c9-46c9-9ee0-e9ced4fbb8fc" width="200" />
+   <img src="https://github.com/user-attachments/assets/0d2e7d52-7663-4d78-8171-64c8b12ba9be" width="200" />
+   <img src="https://github.com/user-attachments/assets/57eaf7e6-1265-49c9-9d1f-50ec175dcb57" width="200" />
+</p>
+App menu for navigating features and permissions setup screens.
 
-4. **App Analysis - Breakdown**  
-   ![App Analysis 1](https://github.com/user-attachments/assets/529e69c2-73e3-4ffe-b2b8-1c7f9859786c)  
-   Detailed breakdown of screen time usage for each app.
+#### ## App Lock Settings and Time Limit Exceeded
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/82bc2262-7efa-42ee-8b55-288d65f4d8f8" width="200" />
+   <img src="https://github.com/user-attachments/assets/bf8e801b-9e9b-4362-bda6-691a015f7836" width="200" />
+</p>
+Settings to set app usage limits and notification when time limit is exceeded.
 
-5. **App Analysis - Weekly View**  
-   ![App Analysis 2](https://github.com/user-attachments/assets/d7125187-c60f-4889-a0ab-4fd485bd36e8)  
-   Weekly screen time stats for a more comprehensive view.
+#### ## App Overlay and Overlay Settings
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/e0d36830-1876-438a-9bf3-41776309cc1c" width="200" />
+   <img src="https://github.com/user-attachments/assets/ec67d708-f54c-4cc9-9aa1-3a10e4ff886c" width="200" />
+</p>
+Customizable overlays that provide reminders and overlay settings screen.
 
-6. **App Menu**  
-   ![App Menu](https://github.com/user-attachments/assets/cc445377-a0c9-46c9-9ee0-e9ced4fbb8fc)  
-   Menu with app features and settings.
-
-7. **App Permissions - Initial Setup**  
-   ![App Permissions 1](https://github.com/user-attachments/assets/0d2e7d52-7663-4d78-8171-64c8b12ba9be)  
-   Permissions screen to grant required app access.
-
-8. **App Permissions - Usage Stats**  
-   ![App Permissions 2](https://github.com/user-attachments/assets/57eaf7e6-1265-49c9-9d1f-50ec175dcb57)  
-   Permissions setup for usage stats access.
-
-9. **App Lock Settings**  
-   ![App Lock Settings](https://github.com/user-attachments/assets/82bc2262-7efa-42ee-8b55-288d65f4d8f8)  
-   Set usage limits and app lock restrictions.
-
-10. **App Lock - Time Limit Reached**  
-    ![App Lock Time Limit](https://github.com/user-attachments/assets/bf8e801b-9e9b-4362-bda6-691a015f7836)  
-    Notification when app time limit has been reached.
-
-11. **App Overlay**  
-    ![App Overlay](https://github.com/user-attachments/assets/e0d36830-1876-438a-9bf3-41776309cc1c)  
-    Overlay providing productive suggestions after exceeding usage limits.
-
-12. **Overlay Settings**  
-    ![Overlay Settings](https://github.com/user-attachments/assets/ec67d708-f54c-4cc9-9aa1-3a10e4ff886c)  
-    Settings for customizing overlays to match user needs.
-
-13. **Chatbot**  
-    ![Chatbot](https://github.com/user-attachments/assets/1c47d4b0-cb23-4371-8ff0-277d2d73ca0f)  
-    AI chatbot offering personalized recommendations and support.
+#### ## Chatbot
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/1c47d4b0-cb23-4371-8ff0-277d2d73ca0f" width="200" />
+</p>
+AI-powered chatbot offering personalized support and recommendations.
 
 ---
 
