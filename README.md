@@ -86,32 +86,32 @@ AI-powered chatbot offering personalized support and recommendations.
 
 
 2. Open up a terminal and run the virtual environment
-             ```bash
+             
             python -m venv venv
 
             venv\Scripts\activate
 
 3. Install Requirements
-             ```bash
+
             pip install -r requirements.txt
 
 4. Run Flask API
-             ```bash
+             
             python app.py
 
 5. Open up a new terminal and download dependencies for Flutter
-             ```bash
+             
             flutter pub get
 
 6. Run Flutter on an Android Emulator or device
        
-        ```bash
+   
        flutter run
 
        A full tutorial for setting up an emulator can be found at https://developer.android.com/studio/run/emulator.
 
 
 7. Login details for the app for testing purposes or you can signup on your own.
-        ```bash
+        
        Login email:ahmedraza1233@gmail.com
        Password:123456
