@@ -19,19 +19,25 @@
 - **App Lock**: Enables app restrictions with customizable time limits and app lockouts.
 - **AI-Powered Chatbot**: Provides personalized recommendations and emotional support for better mental well-being.
 - **Customizable Overlays**: Displays overlays with suggestions to help users stay productive when app limits are reached.
-- **Predictive Analytics**: AI model to predict usage patterns and send proactive alerts.
+- **Predictive Analytics**: AI model to predict usage patterns and send proactive alerts via notifications.
 
 ---
 
 ### Technologies Used
 - **Flutter Framework (Dart)**: For building the Android app interface and managing backend services.
-- **Hive NoSQL Database**: Local storage for fast data access, holding screen time data and app restrictions.
+- **Hive NoSQL Database**: Local storage for fast data access, holding screen time data and app restrictions and for privacy of data.
 - **Firebase Firestore**: Used for secure user authentication.
 - **Flask API (Python)**: Hosts a machine learning LSTM model for predicting usage trends.
 - **TensorFlow & GANs**: TensorFlow powers the predictive model, while GANs generate synthetic datasets for model training.
 
 ---
+### Video Demo
 
+
+https://github.com/user-attachments/assets/a3dba1d1-3e8b-4113-afb5-69b494ede47b
+
+
+---
 ### Screenshots
 
 ## Login Screen  
@@ -77,6 +83,11 @@ Customizable overlays that provide reminders and overlay settings screen.
 </p>
 AI-powered chatbot offering personalized support and recommendations.
 
+## AI powered notifications
+<p float="left">
+   <img src="https://github.com/user-attachments/assets/934ff70a-03d1-4734-af62-fc2ace256538" width="200" />
+   <img src="https://github.com/user-attachments/assets/58a4349f-65a6-4dff-8b5c-41b9488d0f2b" width="200" />
+</p>
 ---
 
 ### How to Run the Project
